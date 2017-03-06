@@ -92,7 +92,7 @@ class Connect:
                 textoutput.write('#########--' + str(ValueError) + ipAddressList[i] + '--#########')
                 textoutput.write('\n')
 
-    def tkinterGui(self):
+    def tkinterGui():
         """TKinter GUI for Variable Input"""
 
         # Create window for credentials
