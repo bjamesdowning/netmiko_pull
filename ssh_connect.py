@@ -3,13 +3,12 @@ Date Modified: 2017-3-6
 Author: Billy Downing
 Purpose: Generates GUI to take inputs in order to log
 into several devices, run a command, and output the
-results to a file in a user inputted directory.
+results to a file in a user created directory.
 '''
 
 from netmiko import ConnectHandler
 from tkinter import *
 import os
-
 
 class Connect:
 
