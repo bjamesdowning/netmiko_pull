@@ -1,5 +1,5 @@
 '''
-Date Modified: 2017-1-26
+Date Modified: 2017-3-6
 Author: Billy Downing
 Purpose: Generates GUI to take inputs in order to log
 into several devices, run a command, and output the
@@ -19,10 +19,8 @@ class Connect:
 
         ip = ipAddress.get()
         cmd = command.get()
-        cmdList = cmd.split('\n')
-        cmdLen = len(cmdList)
-        print(cmdLen)
-        print(cmdList)
+        #cmdList = cmd.split('\n')
+        #cmdLen = len(cmdList)
         ipAddressList = ip.split(',')
         ipAddressLen = len(ipAddressList)
 
@@ -44,17 +42,13 @@ class Connect:
                     }
                     ssh_conn = ConnectHandler(**ASA)
 
-                    for c in range(cmdLen):
-                        output1 = ssh_conn.send_command_expect(cmdList[c])
-
+                    output1 = ssh_conn.send_command_expect(cmd)
                     output2 = ssh_conn.send_command_expect('show hostname')
                     textoutput = open(mkfile.get(), 'a')
                     textoutput.write('----------\n')
                     textoutput.write(output2 + ' ' + ipAddressList[i])
                     textoutput.write('\n')
                     textoutput.write(output1)
-                    print(output1)
-
                 elif osText.get() == ('ios' or 'IOS'):
                     IOS = {
                         'device_type': 'cisco_ios',
@@ -64,9 +58,7 @@ class Connect:
                     }
                     ssh_conn = ConnectHandler(**IOS)
 
-                    for c in range(cmdLen):
-                        output1 = ssh_conn.send_command_expect(cmdList[c])
-
+                    output1 = ssh_conn.send_command_expect(cmd)
                     output2 = ssh_conn.send_command_expect("show run | in hostname")
                     textoutput = open(mkfile.get(), 'a')
                     textoutput.write('----------\n')
@@ -74,9 +66,6 @@ class Connect:
                     textoutput.write('\n')
                     textoutput.write(output1)
                     textoutput.write('\n----------')
-                    print(output1)
-                    print('&&&&&&&&&&')
-
                 elif osText.get() == ('nxos' or 'NXOS'):
                     NXOS = {
                         'device_type': 'cisco_nxos',
@@ -86,15 +75,13 @@ class Connect:
                     }
                     ssh_conn = ConnectHandler(**NXOS)
 
-                    for c in range(cmdLen):
-                        output1 = ssh_conn.send_command_expect(cmdList[c])
-						
+                    output1 = ssh_conn.send_command_expect(cmd)
                     output2 = ssh_conn.send_command_expect("show run | in hostname")
                     textoutput = open(mkfile.get(), 'a')
                     textoutput.write('----------\n')
                     textoutput.write(output2 + ' ' + ipAddressList[i])
                     textoutput.write('\n')
-                    #textoutput.write(output1)
+                    textoutput.write(output1)
                     textoutput.write('\n----------')
                 else:
                     errorLabel.config(text="You've Entered an Incorrect OS")
@@ -179,6 +166,4 @@ class Connect:
 
         window.mainloop()
 
-
-Run = Connect()
-Run.tkinterGui()
+Connect.tkinterGui()
