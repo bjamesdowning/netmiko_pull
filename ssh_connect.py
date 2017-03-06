@@ -16,7 +16,6 @@ class Connect:
     def sshConnect():
 
         #Variable manipulation
-
         ip = ipAddress.get()
         cmd = command.get()
         #cmdList = cmd.split('\n')
@@ -49,6 +48,7 @@ class Connect:
                     textoutput.write(output2 + ' ' + ipAddressList[i])
                     textoutput.write('\n')
                     textoutput.write(output1)
+                
                 elif osText.get() == ('ios' or 'IOS'):
                     IOS = {
                         'device_type': 'cisco_ios',
@@ -66,6 +66,7 @@ class Connect:
                     textoutput.write('\n')
                     textoutput.write(output1)
                     textoutput.write('\n----------')
+                
                 elif osText.get() == ('nxos' or 'NXOS'):
                     NXOS = {
                         'device_type': 'cisco_nxos',
@@ -83,8 +84,10 @@ class Connect:
                     textoutput.write('\n')
                     textoutput.write(output1)
                     textoutput.write('\n----------')
+                
                 else:
                     errorLabel.config(text="You've Entered an Incorrect OS")
+            
             except Exception as ValueError:
                 print(ValueError)
                 textoutput.write('#########--' + str(ValueError) + ipAddressList[i] + '--#########')
