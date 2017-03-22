@@ -2,7 +2,7 @@
 Date Modified: 2017-3-20
 Author: Billy Downing
 Purpose: Take inputs in order to log
-into several devices, run an exec command,
+into several devices, run an exec/config command,
 and output the results to a file.
 '''
 
