@@ -82,9 +82,8 @@ def push_config(ssh_conn):
 
     cmdList = (get_commands(cmdFilename))
     try:
-        for CMD in cmdList:
-            result = ssh_conn.send_config_set(CMD)
-            device_output(result)
+        result = ssh_conn.send_config_set(cmdList)
+        device_output(result)
     except Exception as ValueError:
         print(ValueError)
 
