@@ -1,0 +1,10 @@
+ip access-list standard NTP-ACL
+ remark < next host is dscdirector.lcra.org >
+ permit 172.19.35.171
+ remark < next host is lcrdnpl01g.lcra.org >
+ permit 172.18.224.198
+ permit 172.19.180.211
+ permit 10.33.0.20
+ permit 10.65.0.20
+ permit 172.18.224.236
+ntp access-group peer NTP-ACL
