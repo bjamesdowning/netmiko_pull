@@ -17,8 +17,10 @@ outputFilename = input('Enter Destination Filename: ')
 username = input('Username: ')
 password = getpass.getpass(prompt='Password: ', stream=None)
 
-#Function to generate a list based on commands found in a text file within the same directory. Need to make this
-#dynamic for use of config files from anywhere. 
+'''
+Function to generate a list based on commands found in a text file within the same directory. Need to make this
+dynamic for use of config files from anywhere. 
+'''
 def get_commands(cmdFilename):
     with open(cmdFilename, 'r') as cmd:
         cmdLines = cmd.read()
@@ -81,8 +83,11 @@ def device_dict(deviceFilename,username,password):
     except Exception as ValueError:
         print(ValueError)
 
-#Function is called by device_dict. Calls get_commands to obtain list, then uses already established ssh socket to run commands
-#Need to incorporate more dynamic way or determining if the command is needed to be ran in config or exec mode
+'''        
+Function is called by device_dict. Calls get_commands to obtain list, then uses already established ssh socket to run commands
+Need to incorporate more dynamic way or determining if the command is needed to be ran in config or exec mode. Currenlty either
+'exex' or 'config' needs to be written atop the command list doc
+'''
 def push_config(ssh_conn):
     cmdList = (get_commands(cmdFilename))
     
