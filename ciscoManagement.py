@@ -7,7 +7,7 @@ and output the results to a file.
 '''
 
 
-import os
+import os #not yet used. 
 import getpass
 from netmiko import ConnectHandler
 
