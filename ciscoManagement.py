@@ -84,13 +84,19 @@ def device_dict(deviceFilename,username,password):
 #Function is called by device_dict. Calls get_commands to obtain list, then uses already established ssh socket to run commands
 #Need to incorporate more dynamic way or determining if the command is needed to be ran in config or exec mode
 def push_config(ssh_conn):
-
     cmdList = (get_commands(cmdFilename))
-    try:
+    
+    if (cmdList[0].lower()) == 'config':
+        cmdList.remove(cmdList[0])
         result = ssh_conn.send_config_set(cmdList)
         device_output(result)
-    except Exception as ValueError:
-        print(ValueError)
+        
+    elif (cmdList[0].lower()) == 'exec':
+        cmdList.remove(cmdList[0])
+        
+        for cmd in cmdList:
+            result = ssh_conn.send_command_expect(cmd)
+            device_output(result)
 
 #Function to send config or output to a file. More so to confirm the config I'm putting in each device
 def device_output(result):
