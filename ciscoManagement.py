@@ -39,44 +39,19 @@ def device_dict(deviceFilename,username,password):
     #calls get_devices to obtain list of device IP's
     ipAddressList = (get_devices(deviceFilename))
     try:
-        if (ipAddressList[0].lower()) == 'asa':
+        devtype = ipAddressList[0].lower()
+        if devtype in ("cisco_asa", "ios", "cisco_nxos"):
             ipAddressList.remove(ipAddressList[0]) #Using the first line in the device doc to dictate the OS, then remove it - Find better way
 
             for IP in ipAddressList:
-                ASA = {
-                    'device_type': 'cisco_asa',
+                cisco = {
+                    'device_type': devtype,
                     'ip': IP,
                     'username': username,
                     'password': password
-                    }
-                ssh_conn = ConnectHandler(**ASA)
-                push_config(ssh_conn)
-
-        elif (ipAddressList[0].lower()) == 'ios':
-            ipAddressList.remove(ipAddressList[0])
-
-            for IP in ipAddressList:
-                IOS = {
-                    'device_type': 'cisco_ios',
-                    'ip': IP,
-                    'username': username,
-                    'password': password
-                    }
-                ssh_conn = ConnectHandler(**IOS)
-                push_config(ssh_conn)
-
-        elif (ipAddressList[0].lower()) == 'nxos':
-            ipAddressList.remove(ipAddressList[0])
-
-            for IP in ipAddressList:
-                NXOS = {
-                    'device_type': 'cisco_nxos',
-                    'ip': IP,
-                    'username': username,
-                    'password': password
-                    }
-                ssh_conn = ConnectHandler(**NXOS)
-                push_config(ssh_conn)
+                }
+            ssh_conn = ConnectHandler(**cisco)
+            push_config(ssh_conn)
         else:
             print("You haven't entered a correct OS within the Devices file")
 
@@ -121,8 +96,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-
-
-
